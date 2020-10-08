@@ -32,4 +32,8 @@
 *.app
 
 # Executables
-.vscode/**
+*.exe
+*.out
+*.app
+
+**/.vscode
