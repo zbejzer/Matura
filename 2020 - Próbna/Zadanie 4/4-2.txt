@@ -1,3 +1,0 @@
-Dlugosc: 17
-Poczatek: 193134524
-Koniec: 223545714

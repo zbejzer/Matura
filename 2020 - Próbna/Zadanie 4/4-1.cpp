@@ -7,7 +7,7 @@ using namespace std;
 
 int main() {
     ifstream f_wej("dane4.txt");
-    //ofstream f_wyj("4-1.txt");
+    ofstream f_wyj("4-1.txt");
 
     int max_luka=0, min_luka=INT_MAX, obecna_liczba, poprzednia_liczba;
 
@@ -23,9 +23,8 @@ int main() {
         if( abs(obecna_liczba - poprzednia_liczba) > max_luka )
             max_luka = abs(obecna_liczba - poprzednia_liczba);
     }
-    cout << "Najwieksza: " << max_luka << endl;
-    cout << "Najmniejsza: " << min_luka << endl;
+    f_wyj << max_luka << endl;
+    f_wyj << min_luka << endl;
 
-    getchar();
     return 0;
 }
