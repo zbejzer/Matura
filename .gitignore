@@ -37,3 +37,6 @@
 *.app
 
 **/.vscode
+
+# Struktury matur
+4-*.txt
