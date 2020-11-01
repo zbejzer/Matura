@@ -32,7 +32,6 @@ int main()
 
         int j = element_a+element_b;
         if(element_a != 10){
-            cout << element_a << " " << element_b << endl;
             while(element_a <= 9){
                 out[j] = dane1[element_a];
                 element_a++;
@@ -40,7 +39,6 @@ int main()
             }
         }
         if(element_b != 10){
-            cout << element_a << " " << element_b << endl;
             while(element_b <= 9){
                 out[j] = dane2[element_b];
                 element_b++;
@@ -52,6 +50,6 @@ int main()
             wyj << out[j] << " ";
         wyj << endl;
     }
-    
+
     return 0;
 }
