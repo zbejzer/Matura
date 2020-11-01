@@ -53,7 +53,5 @@ int main()
         wyj << endl;
     }
     
-    getchar();
-    getchar();
     return 0;
 }
