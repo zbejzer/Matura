@@ -1,42 +1,49 @@
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
-int silnia(int a) {
+int silnia(int przyjetaLiczba)
+{
     int wynik = 1;
 
-    if(a != 0) {
-        for(int i = 1; i<=a; i++){
-            wynik *= i;
-        }
-    }
+    for(int i=1; i<=przyjetaLiczba; i++)
+        wynik *= i;
 
     return wynik;
 }
 
-int main() {
-    ifstream f_wej("liczby.txt");
-    ofstream f_wyj("4-2.txt");
+int sumaSilniCyfr(int przyjetaLiczba)
+{
+    int suma = 0;
+    string znakiLiczby = to_string(przyjetaLiczba);
 
-    string obecna_liczba;
-    
-    for(int i=0; i<500; i++) {
-        f_wej >> obecna_liczba;
-
-        int suma = 0;
-
-        for(int i=0; i<obecna_liczba.size(); i++ ) {
-            string obecna_cyfra = "";
-            obecna_cyfra += obecna_liczba[i];
-            suma += silnia( stoi(obecna_cyfra) );
-        }
-
-        if( stoi(obecna_liczba) == suma ) {
-            f_wyj << obecna_liczba << endl;
-        }
+    for(int i=0; i<znakiLiczby.size(); i++)
+    {
+        suma += silnia(znakiLiczby[i] - '0');
     }
+
+    return suma;
+}
+
+int main()
+{
+    ifstream sourceFile("liczby.txt");
+    vector<int> liczbyRowneSumieSilni;
+    
+    for(int i=0; i<500; i++)
+    {
+        int obecnaLiczba;
+        sourceFile >> obecnaLiczba;
+        
+        if( obecnaLiczba == sumaSilniCyfr(obecnaLiczba) )
+            liczbyRowneSumieSilni.push_back(obecnaLiczba);
+    }
+
+    for(int i=0; i<liczbyRowneSumieSilni.size(); i++)
+        cout << liczbyRowneSumieSilni[i] << " ";
 
     return 0;
 }

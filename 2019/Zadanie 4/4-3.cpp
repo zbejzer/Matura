@@ -1,80 +1,82 @@
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <vector>
+#include <array>
 
 using namespace std;
 
-int NWD(int a, int b) {
-    int wynik;
+struct ciag
+{
+    int dzielnik;
+    int pierwszaLiczba;
+    int dlugosc;
 
-    for(int i=1; i<=min(a, b); i++){
-        if(a%i == 0 && b%i == 0) {
-            wynik = i;
-        }
+    ciag()
+    {
+        dlugosc = 0;
     }
 
-    return wynik;
+    ciag(int _pierwszaLiczba)
+    {
+        dlugosc = 1;
+        pierwszaLiczba = _pierwszaLiczba;
+        dzielnik = _pierwszaLiczba;
+    }
+};
+
+int fNWD(int x, int y)
+{
+    while (x!=y)
+    {
+        if(x>y)
+            x-=y;
+        else
+            y-=x;
+    }
+    return x;
 }
 
-int main() {
-    ifstream f_wej("liczby.txt");
-    ofstream f_wyj("4-3.txt");
+int main()
+{
+    ifstream sourceFile("liczby.txt");
+    array<int, 500> liczby;
 
-    int obecna_liczba, poprzednia_liczba;
-    int obecne_NWD, poprzednie_NWD, naj_NWD;
+    for(int i=0; i<liczby.size(); i++)
+        sourceFile >> liczby[i];
 
-    vector <int> ciag;
-    vector <int> naj_ciag;
-
-    f_wej >> poprzednia_liczba;
-    f_wej >> obecna_liczba;
-    obecne_NWD = NWD(poprzednia_liczba, obecna_liczba);
-
-    if( obecne_NWD > 1 ){
-        ciag.push_back(poprzednia_liczba);
-        ciag.push_back(obecna_liczba);
-    } else {
-        ciag.push_back(obecna_liczba);
-        obecne_NWD = obecna_liczba;
-    }
-
-    if( ciag.size() > naj_ciag.size() ) {
-            naj_ciag = ciag;
-    }
+    ciag najdluzszyCiag;
+    ciag obecnyCiag(liczby[0]);
     
-    for(int i=2; i<500; i++) {
-        poprzednia_liczba = obecna_liczba;
-        poprzednie_NWD = obecne_NWD;
-
-        f_wej >> obecna_liczba;
-
-        obecne_NWD = NWD(poprzednie_NWD, obecna_liczba);
-
-        if(obecne_NWD > 1) {
-            ciag.push_back(obecna_liczba);
-        } 
-
-        if( ciag.size() > naj_ciag.size() ) {
-            naj_NWD = obecne_NWD;
-            naj_ciag = ciag;
+    for(int i=1; i<500; i++)
+    {
+        if( fNWD(liczby[i], obecnyCiag.dzielnik) > 1)
+        {
+            obecnyCiag.dzielnik = fNWD(liczby[i], obecnyCiag.dzielnik);
+            obecnyCiag.dlugosc++;
         }
+        
+        if(obecnyCiag.dlugosc > najdluzszyCiag.dlugosc)
+            najdluzszyCiag = obecnyCiag;
 
-        if(obecne_NWD <= 1) {
-            ciag.clear();
-            obecne_NWD = obecna_liczba;
-
-            if(poprzednie_NWD > 1) {
-                ciag.push_back(poprzednia_liczba);
+        if( fNWD(liczby[i], obecnyCiag.dzielnik) == 1)
+        {
+            if( fNWD(liczby[i], liczby[i-1]) > 1)
+            {
+                obecnyCiag.dlugosc = 2;
+                obecnyCiag.pierwszaLiczba = liczby[i-1];
+                obecnyCiag.dzielnik = fNWD(liczby[i], liczby[i-1]);
             }
-
-            ciag.push_back(obecna_liczba);
+            else
+            {
+                obecnyCiag.dlugosc = 1;
+                obecnyCiag.pierwszaLiczba = liczby[i];
+                obecnyCiag.dzielnik = liczby[i];
+            }
         }
     }
 
-    f_wyj << naj_ciag[0] << endl;
-    f_wyj << naj_ciag.size() << endl;
-    f_wyj << naj_NWD << endl;
+    cout << najdluzszyCiag.pierwszaLiczba << " " << najdluzszyCiag.dlugosc << " " << najdluzszyCiag.dzielnik << endl;
 
     return 0;
 }

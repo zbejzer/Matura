@@ -1,35 +1,39 @@
-#include<iostream>
-#include<fstream>
+#include <fstream>
+#include <iostream>
 
 using namespace std;
 
-bool is_pow_3(int a)
+bool isPowerOf3(int przyjetaLiczba)
 {
-    bool warunek = false;
+    int obecnaLiczba = 1;
 
-    for(int i=1; i<=a; i*=3) {
-        if(i == a) {
-            warunek = true;
-        }
-    }
+    while(obecnaLiczba <= 100000)
+    {
+        if(obecnaLiczba == przyjetaLiczba)
+            return true;
 
-    return warunek;
+        obecnaLiczba *= 3;
+    } 
+
+    return false;
 }
 
-int main() {
-    ifstream f_wej("liczby.txt");
-    ofstream f_wyj("4-1.txt");
+int main()
+{
+    ifstream sourceFile("liczby.txt");
 
-    int obecna_liczba, n_pow3 = 0;
+    int powOf3Counter = 0;
     
-    for(int i=0; i<500; i++) {
-        f_wej >> obecna_liczba;
-        if( is_pow_3(obecna_liczba) ) {
-            n_pow3++;    
-        }
+    for(int i=0; i<500; i++)
+    {
+        int obecnaLiczba;
+        sourceFile >> obecnaLiczba;
+
+        if( isPowerOf3(obecnaLiczba) )
+            powOf3Counter++;
     }
 
-    f_wyj << n_pow3;
+    cout << powOf3Counter;
 
     return 0;
 }
