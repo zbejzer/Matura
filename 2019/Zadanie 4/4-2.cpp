@@ -21,9 +21,7 @@ int sumaSilniCyfr(int przyjetaLiczba)
     string znakiLiczby = to_string(przyjetaLiczba);
 
     for(int i=0; i<znakiLiczby.size(); i++)
-    {
         suma += silnia(znakiLiczby[i] - '0');
-    }
 
     return suma;
 }
