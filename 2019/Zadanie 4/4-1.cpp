@@ -3,17 +3,12 @@
 
 using namespace std;
 
-bool isPowerOf3(int przyjetaLiczba)
+bool isPowerOf3(int sprawdzanaLiczba)
 {
-    int obecnaLiczba = 1;
-
-    while(obecnaLiczba <= 100000)
-    {
-        if(obecnaLiczba == przyjetaLiczba)
+    for(int obecnaLiczba = 1; obecnaLiczba<=sprawdzanaLiczba; obecnaLiczba*=3) {
+        if(obecnaLiczba == sprawdzanaLiczba)
             return true;
-
-        obecnaLiczba *= 3;
-    } 
+    }
 
     return false;
 }
