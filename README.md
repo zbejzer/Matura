@@ -1,2 +1,2 @@
-# Matura
- Rozwiązania programów z matur
+# Rozwiązania zadań z matur
+Rozwiązania programów z matur
