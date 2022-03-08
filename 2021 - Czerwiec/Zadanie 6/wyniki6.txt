@@ -1,0 +1,63 @@
+1.
+122
+
+2.
+Grudziadz
+Konin
+
+3.
+wojewodztwo	średnia liczba koncertow na miasto
+dolnoslaskie	0,210526316
+kujawsko-pomorskie	0,235294118
+lodzkie	0,142857143
+lubelskie	0,2
+lubuskie	0,153846154
+malopolskie	0,1875
+mazowieckie	0,375
+opolskie	0,142857143
+podkarpackie	0,2
+podlaskie	0,25
+pomorskie	0,375
+slaskie	0,180722892
+swietokrzyskie	0,125
+warminsko-mazurskie	0,25
+wielkopolskie	0,235294118
+zachodniopomorskie	0,25
+
+4.
+wojewodztwo	średnia liczba koncertow na miasto
+swietokrzyskie	8,00
+lodzkie	7,00
+opolskie	7,00
+lubuskie	6,50
+slaskie	5,53
+malopolskie	5,33
+lubelskie	5,00
+podkarpackie	5,00
+dolnoslaskie	4,75
+kujawsko-pomorskie	4,25
+wielkopolskie	4,25
+podlaskie	4,00
+warminsko-mazurskie	4,00
+zachodniopomorskie	4,00
+mazowieckie	2,67
+pomorskie	2,67
+
+5.
+
+Ciche organy
+Fajne trojkaty
+Male nutki
+Metalowe klarnety
+Piszczace trabki
+Powolne fortepiany
+Rozstrojone pianina
+Stare mandoliny
+Wiosenne bebny
+Zlote saksofony
+
+6.
+Zespół	koncerty weekend	koncerty tydzień
+Niebieskie kontrabasy	4	1
+Powolne fortepiany	5	4
+Wiosenne bebny	4	3
