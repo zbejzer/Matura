@@ -5,25 +5,38 @@
 
 using namespace std;
 
-#define DATA_FILE "szachy_przyklad.txt" // "szachy_przyklad.txt" "szachy.txt" 
-#define DATA_SIZE 125
+#define DATA_FILE "szachy.txt" // "szachy_przyklad.txt" "szachy.txt" 
+#define DATA_SIZE 125 // 9 125
+
+const int capitalLetterOffset = 'a' - 'A';
+
+enum class Color
+{
+    white,
+    black
+};
 
 class Board
 {
 public:
     array<array<char, 8>, 8> arrangement;
 
-    map<char, int> getBlackCount();
-    map<char, int> getWhiteCount();
+    map<char, int> getPieces(Color color);
+    int getPiecesCount();
 };
 
-map<char, int> Board::getBlackCount() {
+map<char, int> Board::getPieces(Color color) {
     map<char, int> counter;
+    int char_offset = 0;
+
+    if (color == Color::black) {
+        char_offset = capitalLetterOffset;
+    }
 
     for (int row = 0; row < 8; row++) {
         for (int column = 0; column < 8; column++) {
-            if (arrangement.at(row).at(column) >= 'a' && arrangement.at(row).at(column) <= 'x') {
-                counter[arrangement.at(row).at(column)]++;
+            if (arrangement.at(row).at(column) >= 'A' + char_offset && arrangement.at(row).at(column) <= 'X' + char_offset) {
+                counter[char(arrangement.at(row).at(column) - char_offset)]++;
             }
         }
     }
@@ -31,13 +44,14 @@ map<char, int> Board::getBlackCount() {
     return counter;
 }
 
-map<char, int> Board::getWhiteCount() {
-    map<char, int> counter;
+int Board::getPiecesCount()
+{
+    int counter = 0;
 
     for (int row = 0; row < 8; row++) {
         for (int column = 0; column < 8; column++) {
-            if (arrangement.at(row).at(column) >= 'A' && arrangement.at(row).at(column) <= 'X') {
-                counter[char(arrangement.at(row).at(column) - 'A' + 'a')]++;
+            if (arrangement.at(row).at(column) != '.') {
+                counter++;
             }
         }
     }
@@ -47,9 +61,9 @@ map<char, int> Board::getWhiteCount() {
 
 int main()
 {
-    array<Board, DATA_SIZE> plansze;
+    array<Board, DATA_SIZE> boards;
     ifstream data(DATA_FILE);
-    int equal_counter = 0, minimal_count = INT32_MAX;
+    int equal_counter = 0, minimal_count = 64, minimal_id = 0;
 
     for (int i = 0; i < DATA_SIZE; i++)
     {
@@ -59,23 +73,24 @@ int main()
             data >> temp;
             for (int k = 0; k < temp.size(); k++)
             {
-                plansze.at(i).arrangement.at(j).at(k) = temp.at(k);
+                boards.at(i).arrangement.at(j).at(k) = temp.at(k);
             }
         }
     }
 
-    for (int i = 0; i < plansze.size(); i++)
+    for (int i = 0; i < boards.size(); i++)
     {
-        if (plansze.at(i).getBlackCount() == plansze.at(i).getWhiteCount() && plansze.at(i).getWhiteCount().size() > 0) {
+        if (boards.at(i).getPieces(Color::black) == boards.at(i).getPieces(Color::white) && boards.at(i).getPieces(Color::white).size() > 0) {
             equal_counter++;
 
-            if (minimal_count > plansze.at(i).getWhiteCount().size()) {
-                minimal_count = plansze.at(i).getWhiteCount().size();
+            if (minimal_count > boards.at(i).getPiecesCount()) {
+                minimal_count = boards.at(i).getPiecesCount();
+                minimal_id = i;
             }
         }
     }
 
-    cout << equal_counter << " " << minimal_count;
+    cout << equal_counter << " " << boards.at(minimal_id).getPiecesCount();
 
     return 0;
 }

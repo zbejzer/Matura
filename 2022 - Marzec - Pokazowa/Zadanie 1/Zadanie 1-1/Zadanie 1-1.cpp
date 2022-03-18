@@ -35,7 +35,7 @@ int Board::getEmptyColumns() {
 
 int main()
 {
-    array<Board, DATA_SIZE> plansze;
+    array<Board, DATA_SIZE> boards;
     ifstream data(DATA_FILE);
     int empty_counter = 0, max_empty_columns = 0;
 
@@ -47,18 +47,18 @@ int main()
             data >> temp;
             for (int k = 0; k < temp.size(); k++)
             {
-                plansze.at(i).arrangement.at(j).at(k) = temp.at(k);
+                boards.at(i).arrangement.at(j).at(k) = temp.at(k);
             }
         }
     }
 
-    for (int i = 0; i < plansze.size(); i++)
+    for (int i = 0; i < boards.size(); i++)
     {
-        if (plansze.at(i).getEmptyColumns() > 0) {
+        if (boards.at(i).getEmptyColumns() > 0) {
             empty_counter++;
         }
-        if (plansze.at(i).getEmptyColumns() > max_empty_columns) {
-            max_empty_columns = plansze.at(i).getEmptyColumns();
+        if (boards.at(i).getEmptyColumns() > max_empty_columns) {
+            max_empty_columns = boards.at(i).getEmptyColumns();
         }
     }
 
