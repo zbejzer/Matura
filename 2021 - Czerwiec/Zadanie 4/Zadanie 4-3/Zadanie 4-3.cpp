@@ -2,15 +2,15 @@
 #include <string>
 #include <fstream>
 
-#define PILK_WEJ "napisy.txt" // napisy przyklad
+#define DATA_FILE "napisy.txt" // napisy przyklad
 
 using namespace std;
 
-bool czyPalindrom(string a)
+bool isPalindrome(string word)
 {
-    for (int i = 0; i < (a.size() - 1) / 2; i++)
+    for (int i = 0; i < word.size() / 2; i++)
     {
-        if (a.at(i) != a.at(a.size() - 1 - i))
+        if (word.at(i) != word.at(word.size() - 1 - i))
         {
             return false;
         }
@@ -21,27 +21,26 @@ bool czyPalindrom(string a)
 
 int main()
 {
-    ifstream dane_wej(PILK_WEJ);
-    int k = 0;
-    string resoult = "";
+    ifstream data(DATA_FILE);
+    string result = "";
 
     for (int i = 1; i <= 1000; i++)
     {
-        string wiersz;
-        dane_wej >> wiersz;
+        string line;
+        data >> line;
 
-        //cout << wiersz.substr(1, wiersz.size() - 1) << endl;
-
-        if (czyPalindrom(wiersz.substr(0, wiersz.size() - 1)))
+        if (isPalindrome(line.substr(0, line.size() - 1)))
         {
-            resoult += wiersz.substr(0, wiersz.size() - 1).at(wiersz.size() / 2 - 1);
+            result += line.substr(0, line.size() - 1).at(line.size() / 2 - 1);
         }
 
-        if (czyPalindrom(wiersz.substr(1, wiersz.size() - 1)))
+        if (isPalindrome(line.substr(1, line.size() - 1)))
         {
-            resoult += wiersz.substr(1, wiersz.size() - 1).at(wiersz.size() / 2 - 1);
+            result += line.substr(1, line.size() - 1).at(line.size() / 2 - 1);
         }
     }
 
-    cout << resoult << endl;
+    cout << result << endl;
+
+    return 0;
 }

@@ -4,53 +4,53 @@
 #include <vector>
 #include <array>
 
-#define PILK_WEJ "napisy.txt" // napisy przyklad
+#define DATA_FILE "napisy.txt" // napisy przyklad
 
 using namespace std;
 
 int main()
 {
-    ifstream dane_wej(PILK_WEJ);
-    string resoult = "";
+    ifstream data(DATA_FILE);
+    string result = "";
 
     for (int i = 0; i < 1000; i++)
     {
-        string wiersz;
-        vector<char> cyfry;
-        dane_wej >> wiersz;
+        string line;
+        vector<char> digits;
+        data >> line;
 
-        for (int j = 0; j < wiersz.size(); j++)
+        for (int j = 0; j < line.size(); j++)
         {
-            if (wiersz[j] < 'A')
+            if (line[j] < 'A')
             {
-                cyfry.push_back(wiersz.at(j));
+                digits.push_back(line.at(j));
             }
         }
 
-        for (int j = 0; j < (cyfry.size() / 2) * 2; j = j + 2)
+        for (int j = 0; j < (digits.size() / 2) * 2; j = j + 2)
         {
-            string suma_dwoch = "";
-            suma_dwoch += cyfry.at(j);
-            suma_dwoch += cyfry.at(j + 1);
+            string pair = "";
+            pair += digits.at(j);
+            pair += digits.at(j + 1);
 
-            int suma_dwoch_int = stoi(suma_dwoch);
+            int pair_number = stoi(pair);
 
-            //cout << suma_dwoch << endl;
-
-            if (suma_dwoch_int >= 65 && suma_dwoch_int <= 90)
+            if (pair_number >= 65 && pair_number <= 90)
             {
-                resoult += char(suma_dwoch_int);
+                result += char(pair_number);
             }
         }
 
-        if (resoult.size() >= 3)
+        if (result.size() >= 3)
         {
-            if (resoult.at(resoult.size() - 1) == 'X' && resoult.at(resoult.size() - 2) == 'X' && resoult.at(resoult.size() - 3) == 'X')
+            if (result.substr(result.size()-3, 3) == "XXX")
             {
                 break;
             }
         }
     }
 
-    cout << resoult << endl;
+    cout << result << endl;
+
+    return 0;
 }

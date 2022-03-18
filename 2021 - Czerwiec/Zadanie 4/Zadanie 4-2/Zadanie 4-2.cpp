@@ -2,27 +2,29 @@
 #include <string>
 #include <fstream>
 
-#define PILK_WEJ "napisy.txt" // napisy przyklad
+#define DATA_FILE "napisy.txt" // napisy przyklad
 
 using namespace std;
 
 int main()
 {
-    ifstream dane_wej(PILK_WEJ);
-    int k = 0;
-    string resoult = "";
+    ifstream data(DATA_FILE);
+    int offset = 0;
+    string result = "";
 
     for (int i = 1; i <= 1000; i++)
     {
-        string wiersz;
-        dane_wej >> wiersz;
+        string line;
+        data >> line;
 
         if (i % 20 == 0)
         {
-            resoult += wiersz[k];
-            k++;
+            result += line.at(offset);
+            offset++;
         }
     }
 
-    cout << resoult << endl;
+    cout << result << endl;
+
+    return 0;
 }
