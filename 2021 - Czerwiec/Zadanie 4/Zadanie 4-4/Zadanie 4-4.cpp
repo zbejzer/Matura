@@ -21,7 +21,7 @@ int main()
 
         for (int j = 0; j < line.size(); j++)
         {
-            if (line[j] < 'A')
+            if (line.at(j) < 'A')
             {
                 digits.push_back(line.at(j));
             }
