@@ -5,7 +5,7 @@
 using namespace std;
 
 #define DATA_FILE "szachy.txt" // "szachy_przyklad.txt" "szachy.txt" 
-#define DATA_SIZE 125
+#define DATA_SIZE 125 // 9 125
 
 class Board
 {
@@ -51,7 +51,7 @@ int main()
             }
         }
     }
-    
+
     for (int i = 0; i < plansze.size(); i++)
     {
         if (plansze.at(i).getEmptyColumns() > 0) {
