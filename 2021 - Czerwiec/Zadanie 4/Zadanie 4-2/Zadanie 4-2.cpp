@@ -10,10 +10,10 @@ int main()
 {
     ifstream dane_wej(PILK_WEJ);
     int k = 0;
-    string resoult="";
+    string resoult = "";
 
     for (int i = 1; i <= 1000; i++)
-    {   
+    {
         string wiersz;
         dane_wej >> wiersz;
 

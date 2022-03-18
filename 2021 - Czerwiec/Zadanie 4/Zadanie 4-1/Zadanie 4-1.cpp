@@ -7,7 +7,7 @@
 using namespace std;
 
 int main()
-{   
+{
     ifstream dane_wej(PILK_WEJ);
     int counter = 0;
 
