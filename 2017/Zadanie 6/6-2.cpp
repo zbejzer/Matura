@@ -2,31 +2,32 @@
 #include <fstream>
 #include <array>
 
+#define DATA_FILE "dane.txt" // "dane.txt" "przyklad.txt" 
+
 using namespace std;
 
 int main()
 {
-    fstream dane_wejsciowe("dane.txt");
-    int ilosc_wierszy = 0;
+    ifstream data(DATA_FILE);
+    int rows_count = 0;
 
     for(int i=0; i<200; i++)
     {
-        array<int, 320> wczytany_wiersz;
-        bool do_usuniecia = false;
+        array<int, 320> temp_row;
+        bool is_unsymmetrical = false;
 
         for(int j=0; j<320; j++)
-            dane_wejsciowe >> wczytany_wiersz[j];
+            data >> temp_row[j];
 
         for(int j=0; j<160; j++)
-            if( wczytany_wiersz[j] != wczytany_wiersz[wczytany_wiersz.size() - 1 - j] )
-                do_usuniecia = true;
+            if( temp_row[j] != temp_row[temp_row.size() - 1 - j] )
+                is_unsymmetrical = true;
 
-        if(do_usuniecia)
-            ilosc_wierszy++;
+        if(is_unsymmetrical)
+            rows_count++;
     }
 
-    cout << "Ilosc wierszy: " << ilosc_wierszy << endl;
+    cout << "Ilosc wierszy: " << rows_count << endl;
 
-    system("pause");
     return 0;
 }

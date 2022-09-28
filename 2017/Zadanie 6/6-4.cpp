@@ -2,40 +2,41 @@
 #include <fstream>
 #include <array>
 
+#define DATA_FILE "dane.txt" // "dane.txt" "przyklad.txt" 
+
 using namespace std;
 
 int main()
 {
-    fstream dane_wejsciowe("dane.txt");
-    array<array<int, 320>, 200> wczytany_wiersz;
+    ifstream data(DATA_FILE);
 
-    int najdluzsza_linia = 1;
+    array<array<int, 320>, 200> picture;
+    int longest_line = 1;
 
     for(int i=0; i<200; i++)
         for(int j=0; j<320; j++)
-            dane_wejsciowe >> wczytany_wiersz[i][j];
+            data >> picture[i][j];
 
     for(int i=0; i<320; i++)
     {
-        int dlugosc_lini = 1;
+        int line_lenght = 1;
 
         for(int j=0; j<199; j++)
         {
-            if( wczytany_wiersz[j][i] == wczytany_wiersz[j+1][i] )
-                dlugosc_lini++;
+            if( picture[j][i] == picture[j+1][i] )
+                line_lenght++;
 
-            if( wczytany_wiersz[j][i] != wczytany_wiersz[j+1][i] || j >= 198 )
+            if( picture[j][i] != picture[j+1][i] || j >= 198 )
             {
-                if(dlugosc_lini > najdluzsza_linia)
-                    najdluzsza_linia = dlugosc_lini;
+                if(line_lenght > longest_line)
+                    longest_line = line_lenght;
 
-                dlugosc_lini = 1;
+                line_lenght = 1;
             }
         }
     }
 
-    cout << "Dlugosc lini: " << najdluzsza_linia << endl;
+    cout << "Dlugosc lini: " << longest_line << endl;
 
-    system("pause");
     return 0;
 }

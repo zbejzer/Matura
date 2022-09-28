@@ -3,44 +3,46 @@
 #include <array>
 #include <math.h>
 
+#define DATA_FILE "dane.txt" // "dane.txt" "przyklad.txt" 
+
 using namespace std;
 
 int main()
 {
-    fstream dane_wejsciowe("dane.txt");
-    array<array<int, 320>, 200> wczytany_wiersz;
-    int ilosc_kontrastujacych = 0;
+    ifstream data(DATA_FILE);
+
+    array<array<int, 320>, 200> picture;
+    int contrast_counter = 0;
 
     for(int i=0; i<200; i++)
         for(int j=0; j<320; j++)
-            dane_wejsciowe >> wczytany_wiersz[i][j];
+            data >> picture[i][j];
 
-    for(int i=0; i<200; i++)
-        for(int j=0; j<320; j++)
+    for(int y=0; y<200; y++)
+        for(int x=0; x<320; x++)
         {
-            bool czy_kontrasuje = false;
+            bool is_contrasting = false;
 
-            if(i > 0)
-                if( abs(wczytany_wiersz[i][j] - wczytany_wiersz[i-1][j]) > 128 ) 
-                    czy_kontrasuje = true;
+            if(y > 0)
+                if( abs(picture[y][x] - picture[y-1][x]) > 128 ) 
+                    is_contrasting = true;
 
-            if(i < 199)
-                if( abs(wczytany_wiersz[i][j] - wczytany_wiersz[i+1][j]) > 128 ) 
-                        czy_kontrasuje = true;
+            if(y < 199)
+                if( abs(picture[y][x] - picture[y+1][x]) > 128 ) 
+                        is_contrasting = true;
 
-            if(j > 0)
-                if( abs(wczytany_wiersz[i][j] - wczytany_wiersz[i][j-1]) > 128 ) 
-                        czy_kontrasuje = true;    
+            if(x > 0)
+                if( abs(picture[y][x] - picture[y][x-1]) > 128 ) 
+                        is_contrasting = true;    
 
-            if(j < 319)
-                if( abs(wczytany_wiersz[i][j] - wczytany_wiersz[i][j+1]) > 128 ) 
-                        czy_kontrasuje = true;
+            if(x < 319)
+                if( abs(picture[y][x] - picture[y][x+1]) > 128 ) 
+                        is_contrasting = true;
 
-            if(czy_kontrasuje) ilosc_kontrastujacych++;
+            if(is_contrasting) contrast_counter ++;
         }
 
-    cout << "Ilosc kontrastujacych: " << ilosc_kontrastujacych << endl;
+    cout << "Ilosc kontrastujacych: " << contrast_counter << endl;
 
-    system("pause");
     return 0;
 }

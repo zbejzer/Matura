@@ -1,26 +1,27 @@
 #include <iostream>
 #include <fstream>
 
+#define DATA_FILE "dane.txt" // "dane.txt" "przyklad.txt" 
+
 using namespace std;
 
 int main()
 {
-    fstream dane_wejsciowe("dane.txt");
-    int najwieksza = 0, najmniejsza = 255;
+    ifstream data(DATA_FILE);
+    int lightest = 0, darkest = 255;
 
     for(int i=0; i<320*200; i++)
     {
-        int wczytana;
-        dane_wejsciowe >> wczytana;
+        int temp;
+        data >> temp;
 
-        if(wczytana > najwieksza)
-            najwieksza = wczytana;
-        if(wczytana < najmniejsza)
-            najmniejsza = wczytana; 
+        if(temp > lightest)
+            lightest = temp;
+        if(temp < darkest)
+            darkest = temp; 
     }
 
-    cout << "Najwieksza, najmniejsza: " << najwieksza << " " << najmniejsza << endl;
+    cout << "Najwieksza, najmniejsza: " << lightest << " " << darkest << endl;
 
-    system("pause");
     return 0;
 }
